@@ -10,7 +10,7 @@ const Login = ({ onLogin }) => {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post("http://your-ec2-public-ip:5000/login", { email, password });
+            const response = await axios.post("http://54.234.231.135:5000/login", { email, password });
 
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("username", response.data.username);

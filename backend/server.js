@@ -12,7 +12,7 @@ app.use(cors());
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "9705679400Tt@", // Set your MySQL root password
+    password: "9705679400Tt@", 
     database: "userDB",
 });
 
@@ -28,10 +28,10 @@ db.connect((err) => {
 app.post("/register", async (req, res) => {
     const { name, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-
     db.query(
         "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
         [name, email, hashedPassword],
+
         (err, result) => {
             if (err) return res.status(500).json({ error: "Email already exists" });
             res.json({ message: "User registered successfully" });
@@ -42,7 +42,7 @@ app.post("/register", async (req, res) => {
 // Login User
 app.post("/login", (req, res) => {
     const { email, password } = req.body;
-
+    
     db.query("SELECT * FROM users WHERE email = ?", [email], async (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
         if (result.length === 0) return res.status(404).json({ error: "User not found" });
